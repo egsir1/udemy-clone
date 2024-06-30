@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import { Roboto, Space_Grotesk } from 'next/font/google';
+import { Roboto, Space_Grotesk as SpaceGrotesk } from 'next/font/google';
 import './globals.css';
 import { ChildProps } from '@/types';
 import { ThemeProvider } from '@/components/providers/theme.provider';
+import { languages } from '@/i18n/settings';
+import { dir } from 'i18next';
 
 const roboto = Roboto({
 	subsets: ['latin', 'cyrillic'],
@@ -10,24 +12,32 @@ const roboto = Roboto({
 	variable: '--font-roboto',
 });
 
-const spaceGrotesk = Space_Grotesk({
+const spaceGrotesk = SpaceGrotesk({
 	weight: ['300', '400', '500', '600', '700'],
 	subsets: ['latin'],
 	variable: '--font-space-grotesk',
 });
 
+export async function generateStaticParams() {
+	return languages.map(lng => ({ lng }));
+}
+
 export const metadata: Metadata = {
 	title: 'Startup Praktikum - Next.js',
-	description: 'LMS platform built by next.js',
+	description: "Startup Praktikum's Next.js project",
 	icons: { icon: '/logo.svg' },
 };
 
-export default function RootLayout({ children }: ChildProps) {
+interface Props extends ChildProps {
+	params: { lng: string };
+}
+
+function RootLayout({ children, params: { lng } }: Props) {
 	return (
-		<html lang='en' suppressHydrationWarning>
+		<html lang={lng} dir={dir(lng)} suppressHydrationWarning>
 			<body
+				className={`${roboto.variable} ${spaceGrotesk.variable} overflow-x-hidden`}
 				suppressHydrationWarning
-				className={`${roboto.variable} ${spaceGrotesk.variable} overflow-x-hidden `}
 			>
 				<ThemeProvider
 					attribute='class'
@@ -41,3 +51,5 @@ export default function RootLayout({ children }: ChildProps) {
 		</html>
 	);
 }
+
+export default RootLayout;
