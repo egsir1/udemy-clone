@@ -1,14 +1,20 @@
+'use client';
+
 import Logo from '@/components/shared/logo';
-import ModeToggle from '@/components/shared/mode-toglle';
 import { Button } from '@/components/ui/button';
 import { navLinks } from '@/constants';
 import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
 import GlobalSearch from './global-search';
 import LanguageDropdown from '@/components/shared/language-dropdown';
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import UserBox from '@/components/shared/user-box';
+import useTranslate from '@/hooks/use-translate';
+import ModeToggle from '@/components/shared/mode-toggle';
 
-const Navbar = () => {
+function Navbar() {
+	const t = useTranslate();
+
 	return (
 		<div className='fixed inset-0 z-40 h-20 bg-background/70 backdrop-blur-xl'>
 			<div className='container mx-auto flex h-full max-w-7xl items-center justify-between border-b'>
@@ -21,7 +27,7 @@ const Navbar = () => {
 								key={nav.route}
 								className='font-medium transition-all hover:text-blue-500 hover:underline'
 							>
-								{nav.name}
+								{t(nav.name)}
 							</Link>
 						))}
 					</div>
@@ -31,22 +37,30 @@ const Navbar = () => {
 					<div className='flex items-center gap-2 border-r pr-3'>
 						<GlobalSearch />
 						<LanguageDropdown />
-						<Button size={'lg'} variant={'ghost'}>
+						<Button size={'icon'} variant={'ghost'}>
 							<ShoppingCart />
 						</Button>
 						<ModeToggle />
 					</div>
-
-					<Button variant={'ghost'} size={'lg'} rounded={'full'}>
-						Log in
-					</Button>
-					<Button size={'lg'} rounded={'full'}>
-						Sign Up
-					</Button>
+					<SignedIn>
+						<UserBox />
+					</SignedIn>
+					<SignedOut>
+						<SignInButton mode='modal'>
+							<Button variant={'ghost'} size={'lg'} rounded={'full'}>
+								Log in
+							</Button>
+						</SignInButton>
+						<SignUpButton mode='modal'>
+							<Button size={'lg'} rounded={'full'}>
+								Sign Up
+							</Button>
+						</SignUpButton>
+					</SignedOut>
 				</div>
 			</div>
 		</div>
 	);
-};
+}
 
 export default Navbar;
