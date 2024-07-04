@@ -1,4 +1,14 @@
-import { Contact, Home, ListVideo, Rss } from 'lucide-react';
+import {
+	Contact,
+	FileCode,
+	GaugeCircle,
+	Home,
+	ListVideo,
+	MessageSquareMore,
+	MonitorPlay,
+	Rss,
+	Settings2,
+} from 'lucide-react';
 import {
 	DiCisco,
 	DiCreativecommonsBadge,
@@ -19,7 +29,7 @@ export const navLinks = [
 	{ route: '', name: 'navLink1', icon: Home },
 	{ route: 'courses', name: 'navLink2', icon: ListVideo },
 	{ route: 'blogs', name: 'navLink3', icon: Rss },
-	{ route: 'contact', name: 'navLink4', icon: Contact },
+	{ route: 'contacts', name: 'navLink4', icon: Contact },
 ];
 
 export const lngs = [
@@ -206,3 +216,42 @@ export const learningJourney = [
 		image: '/assets/journey/certificate.png',
 	},
 ];
+
+export const instructorNavLinks = [
+	{
+		label: 'Dashboard',
+		route: '/instructor',
+		icon: GaugeCircle,
+	},
+	{
+		label: 'My Courses',
+		route: '/instructor/my-courses',
+		icon: MonitorPlay,
+	},
+	{
+		label: 'Create Course',
+		route: '/instructor/create-course',
+		icon: FileCode,
+	},
+	{
+		label: 'Reviews',
+		route: '/instructor/reviews',
+		icon: MessageSquareMore,
+	},
+	{
+		label: 'Settings',
+		route: '/instructor/settings',
+		icon: Settings2,
+	},
+];
+
+export const courseLevels = ['beginner', 'intermediate', 'advanced'];
+export const courseCategory = [
+	'front-end',
+	'back-end',
+	'full-stack',
+	'mobile',
+	'desktop',
+	'game',
+];
+export const courseLanguage = ['english', 'uzbek', 'russian', 'turkish'];
