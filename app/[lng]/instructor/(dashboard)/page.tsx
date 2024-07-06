@@ -5,7 +5,6 @@ import { PiStudent } from 'react-icons/pi';
 import { GrMoney } from 'react-icons/gr';
 import { courses } from '@/constants';
 import InstructorCourseCard from '@/components/cards/instructor-course.card';
-import ReviewCard from '@/components/cards/review.card';
 import InstructorReviewCard from '@/components/cards/instructor-review.card';
 
 function Page() {
@@ -31,6 +30,7 @@ function Page() {
 			<div className='mt-4 grid grid-cols-3 gap-4'>
 				{courses
 					.map(course => (
+						// @ts-ignore
 						<InstructorCourseCard key={course.title} {...course} />
 					))
 					.slice(0, 3)}
@@ -39,13 +39,13 @@ function Page() {
 			<Header title='Reviews' description='Here are your latest reviews' />
 
 			<div className='mt-4 grid grid-cols-3 gap-4'>
-				<div className='rounded-md bg-background px-4 pb-4'>
+				<div className='bg-background rounded-md px-4 pb-4'>
 					<InstructorReviewCard />
 				</div>
-				<div className='rounded-md bg-background px-4 pb-4'>
+				<div className='bg-background rounded-md px-4 pb-4'>
 					<InstructorReviewCard />
 				</div>
-				<div className='rounded-md bg-background px-4 pb-4'>
+				<div className='bg-background rounded-md px-4 pb-4'>
 					<InstructorReviewCard />
 				</div>
 			</div>
